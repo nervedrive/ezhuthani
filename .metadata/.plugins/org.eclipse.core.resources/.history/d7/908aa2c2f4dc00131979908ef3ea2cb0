@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Test page</title>
+<link rel="stylesheet" type="text/css" href="test.css">
+</head>	
+<body>
+<div id ="wrapper">
+	<div id = "nav">
+	<p>This is the nav Entry</p>
+	</div>
+	<div id = "Main">
+		<div id = "main_content">
+		<p>This is the Main Content</p>
+		</div>
+		<div id = "associated_content">
+		<p>This is the Associated Content</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>

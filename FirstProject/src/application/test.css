@@ -1,0 +1,57 @@
+body
+{
+min-width:1024px;
+}
+
+#wrapper
+{
+min-width:100%;
+position:relative;
+height:100%;
+margin: 0 0 0 0;
+padding : 0 0 0 0
+}
+
+#nav
+{
+width:30%;
+height:100%;
+border:1px solid blue;
+
+margin: 0 0 0 0;
+padding : 0 0 0 0;
+float:left;
+}
+
+#Main
+{
+width:69%;
+height:100%;
+border:1px solid green;
+margin: 0 0 0 0;
+padding : 0 0 0 0;
+float:right;
+}
+
+#associated_content
+{
+width:30%;
+height:100%;
+border:1px solid red;
+margin: 0 0 0 0;
+padding : 0 0 0 0;
+float:right;
+}
+
+#main_content
+{
+width:69%;
+height:100%;
+border:1px solid grey;
+margin: 0 0 0 0;
+padding : 0 0 0 0;
+float:left;
+}
+
+
+

@@ -1,0 +1,123 @@
+package application;
+	
+import java.net.URL;
+
+import javafx.application.Application;
+import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+		
+	private Scene scene;
+	MyBrowser myBrowser;
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+ 
+     
+    Label labelFromJavascript;
+ 
+    /**
+     * @param args the command line arguments
+     */
+    
+     
+    private MenuBar buildMenuBarWithMenus(final ReadOnlyDoubleProperty menuWidthProperty)
+    {
+       final MenuBar menuBar = new MenuBar();
+       menuBar.getStyleClass().add("menu1");
+       // Prepare left-most 'File' drop-down menu
+       final Menu fileMenu = new Menu("Kindle Authoring");
+       fileMenu.setStyle("-fx-font-weight: bold;");
+       fileMenu.getItems().add(new MenuItem("About Kindle Authoring"));
+       menuBar.getMenus().add(fileMenu);
+       //menuBar.getOnMouseClicked().handle(this);
+
+
+       // Prepare 'Examples' drop-down menu
+       final Menu examplesMenu = new Menu("File");
+       MenuItem menuitm1 = new MenuItem("New Project");
+       menuitm1.setOnAction(new EventHandler<ActionEvent>() {
+    	   
+       });
+       menuitm1.setGraphic(new ImageView(new Image("application/new.png")));
+       MenuItem menuitm2 = new MenuItem("Open Project");
+       menuitm2.setGraphic(new ImageView(new Image("application/open.png")));
+       examplesMenu.getItems().add(menuitm1);
+       examplesMenu.getItems().add(menuitm2);
+       MenuItem menuitm3 = new MenuItem("Save Project");
+       menuitm3.setGraphic(new ImageView(new Image("application/save.png")));
+       examplesMenu.getItems().add(menuitm3);
+       examplesMenu.getItems().add(new MenuItem("Exit"));
+       menuBar.getMenus().add(examplesMenu);
+
+       // Prepare 'Help' drop-down menu
+       final Menu helpMenu = new Menu("Publish");
+       helpMenu.getItems().add(new MenuItem("Send for Review"));
+       MenuItem menuitm4 = new MenuItem("Export as PDF");
+       //menuitm4.setGraphic(new ImageView(new Image("application/pdf.png")));
+       helpMenu.getItems().add(menuitm4);
+       helpMenu.getItems().add(new MenuItem("Export For Kindle"));
+       helpMenu.getItems().add(new MenuItem("Export For Barnes & Nobel"));
+       helpMenu.getItems().add(new MenuItem("Export For iBooks"));
+  
+       menuBar.getMenus().add(helpMenu);
+
+       // bind width of menu bar to width of associated stage
+       menuBar.prefWidthProperty().bind(menuWidthProperty);
+
+       return menuBar;
+    }
+
+    /**
+     * Start of JavaFX application demonstrating menu support.
+     * 
+     * @param stage Primary stage.
+     */
+    @Override
+    public void start(final Stage stage)
+    {
+       stage.setTitle("Kindle Authoring Tool");
+       myBrowser = new MyBrowser();
+       
+       final Group rootGroup = new Group();
+       final Scene scene = new Scene(rootGroup, 800, 400, Color.WHITE);
+      // myBrowser.setMaxSize(900, 900);
+     //  final Scene scene = new Scene(myBrowser, 900, 900);
+       scene.getStylesheets().add("application/application.css");
+       final MenuBar menuBar = buildMenuBarWithMenus(stage.widthProperty());
+       rootGroup.getChildren().add(menuBar);
+       stage.setScene(scene);
+       stage.show();
+    }
+
+    class MyBrowser extends Region{
+    	 
+        final String hellohtml = "hello.html";
+     
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+             
+        public MyBrowser(){
+     
+            URL urlHello = getClass().getResource("test.html");
+            webEngine.load(urlHello.toExternalForm());
+         
+            getChildren().add(webView);
+        }
+    }
+     
+}
